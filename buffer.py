@@ -69,6 +69,7 @@ def main(args):
         ''' Train synthetic data '''
         teacher_net = get_network(args.model, channel, num_classes, im_size).to(args.device) # get a random model
         teacher_net.train()
+        torch.save(teacher_net.state_dict(), f'ConvNet_{it}'.pth)
         lr = args.lr_teacher
         teacher_optim = torch.optim.SGD(teacher_net.parameters(), lr=lr, momentum=args.mom, weight_decay=args.l2)  # optimizer_img for synthetic data
         teacher_optim.zero_grad()
